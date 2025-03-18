@@ -4,7 +4,6 @@ import parse, {
   domToReact,
 } from "html-react-parser"
 import Image from "next/image"
-import Link from "next/link"
 
 import { isRelative } from "lib/utils"
 
@@ -16,8 +15,8 @@ const options: HTMLReactParserOptions = {
           src,
           alt,
           class: className,
-          width = '100',
-          height = '100',
+          width = "100",
+          height = "100",
         } = domNode.attribs
 
         if (isRelative(src)) {
@@ -36,16 +35,20 @@ const options: HTMLReactParserOptions = {
         }
       }
 
+      // ✅ Updated to plain <a> tag
       if (domNode.name === "a") {
         const { href, class: className } = domNode.attribs
 
-        if (href && isRelative(href)) {
-          return (
-            <Link href={href ?? "/"} passHref legacyBehavior={true}>
-              <a className={className}>{domToReact(domNode.children)}</a>
-            </Link>
-          )
-        }
+        return (
+          <a
+            href={href ?? "/"}
+            className={className}
+            target={isRelative(href) ? "_self" : "_blank"} // Open external links in a new tab
+            rel={isRelative(href) ? undefined : "noopener noreferrer"}
+          >
+            {domToReact(domNode.children)}
+          </a>
+        )
       }
     }
   },

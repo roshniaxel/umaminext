@@ -24,13 +24,7 @@ export function Breadcrumbs({ items, ...props }: BreadcrumbsProps) {
       <ol className="flex">
         {items.map((item, index) => (
           <li key={index} className="flex items-center leading-none truncate">
-            {item.url ? (
-              <Link href={item.url ?? "/"} passHref legacyBehavior={true}>
-                <a className="underline text-link">{item.title}</a>
-              </Link>
-            ) : (
-              item.title
-            )}
+           item.title
             {index !== items.length - 1 && (
               <svg
                 className="w-3 h-3 mx-1"

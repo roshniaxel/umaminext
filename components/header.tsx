@@ -35,12 +35,7 @@ export function Header({ menus }: HeaderProps) {
         </div>
       </div>
       <div className="container relative flex-wrap items-center justify-between py-6 md:flex lg:py-10">
-        <Link href="/" passHref legacyBehavior={true}>
-          <a className="flex justify-start">
-            <Logo className="w-48 h-12 text-primary lg:h-16 lg:w-52" />
-            <span className="sr-only">{siteConfig.name}</span>
-          </a>
-        </Link>
+      siteConfig.name
         <button
           className="absolute transition-all border beorder-transparent md:hidden right-4 top-8 hover:border-link"
           onClick={() => setShowMenu(!showMenu)}
