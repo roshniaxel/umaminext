@@ -4,12 +4,14 @@ import parse, {
   domToReact,
 } from "html-react-parser"
 import Image from "next/image"
+import Link from "next/link"
 
 import { isRelative } from "lib/utils"
 
 const options: HTMLReactParserOptions = {
   replace: (domNode) => {
     if (domNode instanceof Element) {
+      // ✅ Handle <img> elements
       if (domNode.name === "img") {
         const {
           src,
@@ -35,20 +37,17 @@ const options: HTMLReactParserOptions = {
         }
       }
 
-      // ✅ Updated to plain <a> tag
+      // ✅ Handle <a> elements
       if (domNode.name === "a") {
         const { href, class: className } = domNode.attribs
 
-        return (
-          <a
-            href={href ?? "/"}
-            className={className}
-            target={isRelative(href) ? "_self" : "_blank"} // Open external links in a new tab
-            rel={isRelative(href) ? undefined : "noopener noreferrer"}
-          >
-            {domToReact(domNode.children)}
-          </a>
-        )
+        if (href && isRelative(href)) {
+          return (
+            <Link href={href} className={className}>
+              {domToReact(domNode.children)}
+            </Link>
+          )
+        }
       }
     }
   },

@@ -20,8 +20,11 @@ export function FormSearch({ className, ...props }: FormSearchProps) {
 
   return (
     <>
-     <span className="sr-only">{t("search")}</span>
-     <SearchIcon />
+      {/* ✅ Updated Link here */}
+      <Link href="/search" className="md:hidden">
+        <span className="sr-only">{t("search")}</span>
+        <SearchIcon />
+      </Link>
       <form
         className={classNames("text-sm hidden md:flex items-center", className)}
         onSubmit={onSubmit}

@@ -52,7 +52,13 @@ export function NodeArticle({ node, additionalContent }: NodeArticleProps) {
             <div className="flex mb-6 space-x-2">
               <span className="font-semibold">{t("tags")}: </span>
               {node.field_tags.map((tag) => (
-               tag.name
+                <Link
+                  key={tag.id}
+                  href={tag.path.alias}
+                  className="underline transition-colors text-link hover:text-primary hover:bg-border"
+                >
+                  {tag.name}
+                </Link>
               ))}
             </div>
           ) : null}
@@ -67,8 +73,7 @@ export function NodeArticle({ node, additionalContent }: NodeArticleProps) {
                 }
                 width={785}
                 height={525}
-                layout="responsive"
-                objectFit="cover"
+                className="w-full h-auto object-cover"
               />
             </figure>
           )}

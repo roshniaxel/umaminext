@@ -10,10 +10,13 @@ export interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items, ...props }: BreadcrumbsProps) {
   const { t } = useTranslation()
+
+  // Return nothing if no items
   if (!items?.length) {
     return null
   }
 
+  // Add home as the first breadcrumb
   items.unshift({
     title: t("home"),
     url: "/",
@@ -24,7 +27,15 @@ export function Breadcrumbs({ items, ...props }: BreadcrumbsProps) {
       <ol className="flex">
         {items.map((item, index) => (
           <li key={index} className="flex items-center leading-none truncate">
-           item.title
+            {item.url ? (
+              // ✅ Updated to new Link format
+              <Link href={item.url} className="underline text-link">
+                {item.title}
+              </Link>
+            ) : (
+              // Render text if no URL
+              item.title
+            )}
             {index !== items.length - 1 && (
               <svg
                 className="w-3 h-3 mx-1"

@@ -34,7 +34,10 @@ export function Footer({ menus, blocks }: FooterProps) {
             </h2>
             <div className="grid max-w-4xl mx-auto mt-4 text-sm text-center md:text-left md:grid-cols-4 gap-y-3 gap-x-4">
               {blocks.recipeCollections.map((tag) => (
-               tag.name
+                // ✅ Updated Link here
+                <Link key={tag.id} href={tag.path.alias} className="font-semibold hover:underline">
+                  {tag.name}
+                </Link>
               ))}
             </div>
           </div>
@@ -62,17 +65,15 @@ export function Footer({ menus, blocks }: FooterProps) {
                   </p>
                 )}
                 {blocks.footerPromo.field_content_link && (
+                  // ✅ Updated Link here
                   <Link
                     href={blocks.footerPromo.field_content_link.uri.replace(
                       "internal:",
                       ""
                     )}
-                    passHref
-                    legacyBehavior={true}
+                    className="text-sm underline transition-colors hover:bg-black"
                   >
-                    <a className="text-sm underline transition-colors hover:bg-black">
-                      {blocks.footerPromo.field_content_link.title}
-                    </a>
+                    {blocks.footerPromo.field_content_link.title}
                   </Link>
                 )}
               </div>
