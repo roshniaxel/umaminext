@@ -16,15 +16,15 @@ export function LocaleSwitcher({ ...props }) {
       <ul className="flex space-x-4">
         {locales.map((locale) => (
           <li key={locale}>
-            <Link legacyBehavior={false} href={asPath} locale={locale} passHref >
-              <a
-                data-cy={`local-switcher-${locale}`}
-                className={classNames(
-                  locale === currentLocale ? "font-semibold" : "font-normal"
-                )}
-              >
-                {config.locales[locale]}
-              </Link>
+            <Link
+              href={asPath}
+              locale={locale}
+              className={classNames(
+                locale === currentLocale ? "font-semibold" : "font-normal"
+              )}
+              data-cy={`local-switcher-${locale}`}
+            >
+              {config.locales[locale]}
             </Link>
           </li>
         ))}
