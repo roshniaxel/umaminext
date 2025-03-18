@@ -1,6 +1,5 @@
 import { DrupalNode } from "next-drupal"
 import { useTranslation } from "next-i18next"
-import Link from "next/link"
 
 import { MediaImage } from "components/media--image"
 
@@ -17,10 +16,7 @@ export function NodeRecipeCard({ node, ...props }: NodeRecipeCardProps) {
       {...props}
     >
       <h2 className="flex-1 font-serif text-[22px]">{node.title}</h2>
-      <Link legacyBehavior={false}
-        href={node.path.alias}
-        className="inline-flex items-center uppercase hover:underline text-link"
-      >
+      <span className="inline-flex items-center uppercase text-link">
         {t("view-recipe")}
         <svg
           className="w-5 h-5 ml-1"
@@ -33,7 +29,7 @@ export function NodeRecipeCard({ node, ...props }: NodeRecipeCardProps) {
         >
           <path d="m9 18 6-6-6-6" />
         </svg>
-      </Link>
+      </span>
       <MediaImage media={node.field_media_image} width={335} height={225} />
     </article>
   )

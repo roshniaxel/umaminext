@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { DrupalNode } from "next-drupal"
 import { useTranslation } from "next-i18next"
 
@@ -18,10 +17,7 @@ export function NodeArticleCard({ node, ...props }: NodeArticleCardProps) {
     >
       <h2 className="flex-1 font-serif text-2xl">{node.title}</h2>
       <MediaImage media={node.field_media_image} width={335} height={225} />
-      <Link legacyBehavior={false}
-        href={node.path.alias}
-        className="inline-flex items-center uppercase hover:underline text-link"
-      >
+      <span className="inline-flex items-center uppercase text-link">
         {t("view-article")}
         <svg
           className="w-5 h-5 ml-1"
@@ -34,7 +30,7 @@ export function NodeArticleCard({ node, ...props }: NodeArticleCardProps) {
         >
           <path d="m9 18 6-6-6-6" />
         </svg>
-      </Link>
+      </span>
     </article>
   )
 }

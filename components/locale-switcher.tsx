@@ -1,11 +1,10 @@
-import Link from "next/link"
 import { useRouter } from "next/router"
 import classNames from "classnames"
 
 import config from "site.config"
 
 export function LocaleSwitcher({ ...props }) {
-  const { locales, asPath, locale: currentLocale } = useRouter()
+  const { locales, locale: currentLocale } = useRouter()
 
   if (!locales || locales.length < 2) {
     return null
@@ -16,16 +15,14 @@ export function LocaleSwitcher({ ...props }) {
       <ul className="flex space-x-4">
         {locales.map((locale) => (
           <li key={locale}>
-            <Link
-              href={asPath}
-              locale={locale}
+            <span
+              data-cy={`local-switcher-${locale}`}
               className={classNames(
                 locale === currentLocale ? "font-semibold" : "font-normal"
               )}
-              data-cy={`local-switcher-${locale}`}
             >
               {config.locales[locale]}
-            </Link>
+            </span>
           </li>
         ))}
       </ul>

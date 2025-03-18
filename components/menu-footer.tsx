@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { DrupalMenuLinkContent } from "next-drupal"
 
 interface MenuFooterProps {
@@ -11,13 +10,9 @@ export function MenuFooter({ items, ...props }: MenuFooterProps) {
       <ul className="flex flex-col space-y-2">
         {items.map((item) => (
           <li key={item.id}>
-            {/* ✅ Updated Link Component */}
-            <Link legacyBehavior={false}
-              href={item.url}
-              className="text-sm font-semibold transition-colors hover:bg-black hover:underline"
-            >
+            <span className="text-sm font-semibold transition-colors hover:bg-black hover:underline">
               {item.title}
-            </Link>
+            </span>
           </li>
         ))}
       </ul>

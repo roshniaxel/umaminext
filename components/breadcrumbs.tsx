@@ -1,5 +1,4 @@
 import { useTranslation } from "next-i18next"
-import Link from "next/link"
 
 export interface BreadcrumbsProps {
   items: {
@@ -10,13 +9,10 @@ export interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items, ...props }: BreadcrumbsProps) {
   const { t } = useTranslation()
-
-  // Return nothing if no items
   if (!items?.length) {
     return null
   }
 
-  // Add home as the first breadcrumb
   items.unshift({
     title: t("home"),
     url: "/",
@@ -28,12 +24,8 @@ export function Breadcrumbs({ items, ...props }: BreadcrumbsProps) {
         {items.map((item, index) => (
           <li key={index} className="flex items-center leading-none truncate">
             {item.url ? (
-              // ✅ Updated to new Link format
-              <Link legacyBehavior={false} href={item.url} className="underline text-link">
-                {item.title}
-              </Link>
+              <span className="underline text-link">{item.title}</span>
             ) : (
-              // Render text if no URL
               item.title
             )}
             {index !== items.length - 1 && (
