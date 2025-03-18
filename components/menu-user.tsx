@@ -17,7 +17,7 @@ export function MenuUser() {
   if (status === "unauthenticated") {
     return (
       // ✅ Updated Link without legacyBehavior
-      <Link href="/login" className="text-text hover:underline">
+      <Link legacyBehavior={false} href="/login" className="text-text hover:underline">
         {t("login")}
       </Link>
     )

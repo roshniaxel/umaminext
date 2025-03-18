@@ -29,7 +29,7 @@ export function Breadcrumbs({ items, ...props }: BreadcrumbsProps) {
           <li key={index} className="flex items-center leading-none truncate">
             {item.url ? (
               // ✅ Updated to new Link format
-              <Link href={item.url} className="underline text-link">
+              <Link legacyBehavior={false} href={item.url} className="underline text-link">
                 {item.title}
               </Link>
             ) : (

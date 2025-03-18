@@ -12,7 +12,7 @@ export function MenuFooter({ items, ...props }: MenuFooterProps) {
         {items.map((item) => (
           <li key={item.id}>
             {/* ✅ Updated Link Component */}
-            <Link
+            <Link legacyBehavior={false}
               href={item.url}
               className="text-sm font-semibold transition-colors hover:bg-black hover:underline"
             >

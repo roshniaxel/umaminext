@@ -36,7 +36,7 @@ export function Header({ menus }: HeaderProps) {
       </div>
       <div className="container relative flex-wrap items-center justify-between py-6 md:flex lg:py-10">
         {/* ✅ Updated Link Component */}
-        <Link href="/" className="flex justify-start">
+        <Link legacyBehavior={false} href="/" className="flex justify-start">
           <Logo className="w-48 h-12 text-primary lg:h-16 lg:w-52" />
           <span className="sr-only">{siteConfig.name}</span>
         </Link>

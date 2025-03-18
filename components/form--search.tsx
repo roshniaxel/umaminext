@@ -21,7 +21,7 @@ export function FormSearch({ className, ...props }: FormSearchProps) {
   return (
     <>
       {/* ✅ Updated Link here */}
-      <Link href="/search" className="md:hidden">
+      <Link legacyBehavior={false} href="/search" className="md:hidden">
         <span className="sr-only">{t("search")}</span>
         <SearchIcon />
       </Link>

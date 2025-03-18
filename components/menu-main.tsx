@@ -23,7 +23,7 @@ export function MenuMain({ items, ...props }: MenuMainProps) {
           return (
             <li key={item.id}>
               {/* ✅ Updated Link Component */}
-              <Link
+              <Link legacyBehavior={false}
                 href={item.url}
                 className={classNames(
                   "text-xl border-b-[3px] flex border-b-transparent font-serif transition-colors hover:text-primary",
