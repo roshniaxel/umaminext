@@ -16,14 +16,14 @@ interface SearchPageProps extends LayoutProps {}
 export default function SearchPage({ menus, blocks }: SearchPageProps) {
   const { t } = useTranslation()
   const router = useRouter()
-  const [keys, setKeys] = React.useState<string>(null)
+  const [keys, setKeys] = React.useState<string>("") // ✅ Default value to prevent null
   const { isLoading, results } = useSearch(keys)
 
   React.useEffect(() => {
     if (router.query?.keys) {
       setKeys(router.query.keys as string)
     }
-  }, [router])
+  }, [router.query?.keys])
 
   return (
     <Layout
@@ -52,14 +52,16 @@ export default function SearchPage({ menus, blocks }: SearchPageProps) {
                 key={result.id}
                 className="grid gap-2 p-4 bg-white border border-border"
               >
-                <Link href={result.path.alias} passHref legacyBehavior={true}>
-                  <a className="font-serif text-2xl underline text-link">
-                    <Highlighter
-                      textToHighlight={result.title}
-                      searchWords={[keys]}
-                      highlightClassName="font-semibold bg-transparent"
-                    />
-                  </a>
+                {/* ✅ Corrected Link Usage */}
+                <Link
+                  href={result.path.alias || "#"}
+                  className="font-serif text-2xl underline text-link"
+                >
+                  <Highlighter
+                    textToHighlight={result.title}
+                    searchWords={[keys]}
+                    highlightClassName="font-semibold bg-transparent"
+                  />
                 </Link>
                 <p className="text-text">
                   <span className="capitalize">

@@ -38,10 +38,12 @@ export default function AccountsPage({
           },
         ]}
       >
-        <Link href="/articles/new" passHref legacyBehavior={true}>
-          <a className="px-3 py-1 font-serif text-lg text-white transition-colors border-2 rounded-md lg:text-xl lg:px-4 lg:py-2 bg-secondary hover:bg-white hover:text-black border-secondary">
-            New Article
-          </a>
+        {/* Corrected Link Implementation */}
+        <Link
+          href="/articles/new"
+          className="px-3 py-1 font-serif text-lg text-white transition-colors border-2 rounded-md lg:text-xl lg:px-4 lg:py-2 bg-secondary hover:bg-white hover:text-black border-secondary"
+        >
+          {t("new-article")}
         </Link>
       </PageHeader>
       <div className="container">
@@ -65,7 +67,7 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<AccountPageProps>> {
   // Check if user is authenticated.
-  const session = await getSession({ ctx: context })
+  const session = await getSession({ req: context.req }) // ✅ Corrected here
 
   if (!session) {
     return {
@@ -77,27 +79,32 @@ export async function getServerSideProps(
   }
 
   // Fetch all articles sorted by the user.
-  const articles = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--article",
-    context,
-    {
-      params: new DrupalJsonApiParams()
-        .addFilter("uid.id", session.user.id)
-        .addInclude(["field_media_image.field_media_image", "uid.user_picture"])
-        .addFields("node--article", [
-          "title",
-          "path",
-          "field_media_image",
-          "status",
-          "created",
-        ])
-        .addFields("media--image", ["field_media_image"])
-        .addFields("file--file", ["uri", "resourceIdObjMeta"])
-        .addSort("created", "DESC")
-        .getQueryObject(),
-      withAuth: session.accessToken,
-    }
-  )
+  let articles = []
+  try {
+    articles = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--article",
+      context,
+      {
+        params: new DrupalJsonApiParams()
+          .addFilter("uid.id", session.user.id)
+          .addInclude(["field_media_image.field_media_image", "uid.user_picture"])
+          .addFields("node--article", [
+            "title",
+            "path",
+            "field_media_image",
+            "status",
+            "created",
+          ])
+          .addFields("media--image", ["field_media_image"])
+          .addFields("file--file", ["uri", "resourceIdObjMeta"])
+          .addSort("created", "DESC")
+          .getQueryObject(),
+        withAuth: session.accessToken,
+      }
+    )
+  } catch (error) {
+    console.error("Error fetching articles:", error)
+  }
 
   return {
     props: {
