@@ -66,5 +66,6 @@ export async function getStaticProps(
       ...(await getGlobalElements(context)),
       articles,
     },
+    revalidate: 10,
   }
 }

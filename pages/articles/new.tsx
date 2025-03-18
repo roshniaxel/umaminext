@@ -42,5 +42,6 @@ export async function getStaticProps(
     props: {
       ...(await getGlobalElements(context)),
     },
+    revalidate: 10, // Revalidate page every 10 seconds
   }
 }

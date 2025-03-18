@@ -52,16 +52,14 @@ export function NodeArticle({ node, additionalContent }: NodeArticleProps) {
             <div className="flex mb-6 space-x-2">
               <span className="font-semibold">{t("tags")}: </span>
               {node.field_tags.map((tag) => (
-                <span
-                  key={tag.id}
-                  className="text-link cursor-default"
-                >
-                  {tag.name}
-                </span>
+                <Link key={tag.id} href={tag.path.alias} passHref legacyBehavior={true}>
+                  <a className="underline transition-colors text-link hover:text-primary hover:bg-border">
+                    {tag.name}
+                  </a>
+                </Link>
               ))}
             </div>
           ) : null}
-
           {node.field_media_image && (
             <figure className="mb-10">
               <Image
@@ -73,7 +71,8 @@ export function NodeArticle({ node, additionalContent }: NodeArticleProps) {
                 }
                 width={785}
                 height={525}
-                className="w-full h-auto object-cover"
+                layout="responsive"
+                objectFit="cover"
               />
             </figure>
           )}

@@ -101,5 +101,6 @@ export async function getStaticProps(
       promotedArticles,
       promotedRecipes,
     },
+    revalidate: 10,
   }
 }
