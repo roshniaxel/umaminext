@@ -1,6 +1,5 @@
 import classNames from "classnames"
 import { DrupalMenuLinkContent } from "next-drupal"
-import Link from "next/link"
 import { useRouter } from "next/router"
 
 interface MenuMainProps {
@@ -22,18 +21,16 @@ export function MenuMain({ items, ...props }: MenuMainProps) {
 
           return (
             <li key={item.id}>
-              {/* ✅ Updated Link Component */}
-              <Link legacyBehavior={false}
-                href={item.url}
+              <span
                 className={classNames(
-                  "text-xl border-b-[3px] flex border-b-transparent font-serif transition-colors hover:text-primary",
+                  "text-xl border-b-[3px] flex border-b-transparent font-serif transition-colors hover:text-primary cursor-pointer",
                   {
                     "border-b-primary": isActive,
                   }
                 )}
               >
                 {item.title}
-              </Link>
+              </span>
             </li>
           )
         })}

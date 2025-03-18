@@ -52,16 +52,16 @@ export function NodeArticle({ node, additionalContent }: NodeArticleProps) {
             <div className="flex mb-6 space-x-2">
               <span className="font-semibold">{t("tags")}: </span>
               {node.field_tags.map((tag) => (
-                <Link legacyBehavior={false}
+                <span
                   key={tag.id}
-                  href={tag.path.alias}
-                  className="underline transition-colors text-link hover:text-primary hover:bg-border"
+                  className="text-link cursor-default"
                 >
                   {tag.name}
-                </Link>
+                </span>
               ))}
             </div>
           ) : null}
+
           {node.field_media_image && (
             <figure className="mb-10">
               <Image

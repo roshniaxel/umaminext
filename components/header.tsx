@@ -1,5 +1,4 @@
 import * as React from "react"
-import Link from "next/link"
 import { DrupalMenuLinkContent } from "next-drupal"
 import classNames from "classnames"
 
@@ -35,11 +34,13 @@ export function Header({ menus }: HeaderProps) {
         </div>
       </div>
       <div className="container relative flex-wrap items-center justify-between py-6 md:flex lg:py-10">
-        {/* ✅ Updated Link Component */}
-        <Link legacyBehavior={false} href="/" className="flex justify-start">
-          <Logo className="w-48 h-12 text-primary lg:h-16 lg:w-52" />
-          <span className="sr-only">{siteConfig.name}</span>
-        </Link>
+        {/* ✅ Removed Link and replaced with div */}
+        <div className="flex justify-start cursor-pointer">
+          <div className="flex items-center">
+            <Logo className="w-48 h-12 text-primary lg:h-16 lg:w-52" />
+            <span className="sr-only">{siteConfig.name}</span>
+          </div>
+        </div>
         <button
           className="absolute transition-all border border-transparent md:hidden right-4 top-8 hover:border-link"
           onClick={() => setShowMenu(!showMenu)}

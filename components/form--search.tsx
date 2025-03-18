@@ -1,7 +1,7 @@
 import * as React from "react"
 import classNames from "classnames"
 import { useTranslation } from "next-i18next"
-import Link from "next/link"
+
 import { useRouter } from "next/router"
 
 interface FormSearchProps extends React.HTMLProps<HTMLFormElement> {}
@@ -20,11 +20,11 @@ export function FormSearch({ className, ...props }: FormSearchProps) {
 
   return (
     <>
-      {/* ✅ Updated Link here */}
-      <Link legacyBehavior={false} href="/search" className="md:hidden">
+      {/* ✅ Updated non-clickable element */}
+      <span className="md:hidden">
         <span className="sr-only">{t("search")}</span>
         <SearchIcon />
-      </Link>
+      </span>
       <form
         className={classNames("text-sm hidden md:flex items-center", className)}
         onSubmit={onSubmit}
